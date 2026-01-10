@@ -1,23 +1,35 @@
 .hero-container {
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   background-color: var(--bg-dark); 
-  
   text-align: center;
-  padding: 20px;
+  padding: 100px 20px 10px; /* pushes content down from top */
+}
+
+#hero,
+#projects,
+#about,
+#contact,
+#skills {
+  scroll-margin-top: 100px; /* height of your sticky navbar */
 }
 
 
 
 .hero-avatar {
-  
-  background-color: #0f172a; /* 👈 matches your Hero bg */
+  width: 650px;        /* control size */
+  max-width: 200%;
+  height: auto;
+
+  display: block;
+  margin: 0 auto;      /* center in middle */
+
+  background-color: #0f172a; /* matches your Hero bg */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* soft blur */
-  
 }
 .hero-avatar {
   /* ... previous styles ... */
