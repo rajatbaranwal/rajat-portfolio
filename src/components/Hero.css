@@ -1,5 +1,5 @@
 .hero-container {
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -7,7 +7,7 @@
 
   background-color: var(--bg-dark);
   text-align: center;
-  padding: 100px 20px 10px;
+  padding: 100px 20px 60px;
 }
 
 #hero,
@@ -41,7 +41,7 @@
 /* Title */
 .hero-title {
   position: relative;
-  font-size: 20rem;
+  font-size: clamp(6rem, 16vw, 18rem); /* responsive magic */
   font-weight: 800;
   color: white;
   margin-top: -20px;
@@ -125,7 +125,6 @@
   }
 
   .hero-title {
-    font-size: 3rem;
     margin-top: 0;
   }
 
