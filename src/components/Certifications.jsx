@@ -3,6 +3,16 @@ import { motion } from 'framer-motion';
 
 const certifications = [
   {
+    name: 'Oracle Certified Professional: Java SE 11 Developer',
+    issuer: 'Oracle University',
+    link: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=DB6F2D28C4ED27CE78A4084C24EF9836F2DB8FDF3FB01C82C45794EAD703B616'
+  },
+  {
+    name: 'Oracle Cloud Infrastructure 2025 Certified Data Science Professional',
+    issuer: 'Oracle University',
+    link: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=505B7516E38411BBC74AA2B028392D09474BA964C7D8161EB6B78718824A451C'
+  },
+  {
     name: 'Google Data Analytics Professional Certificate',
     issuer: 'Coursera',
     link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/CKMZ8NT98E24'
@@ -12,6 +22,7 @@ const certifications = [
     issuer: 'Coursera',
     link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/28QCD3ZXM2NF'
   },
+  
   {
     name: 'Google Cloud Skill Badges (15 Badges)',
     issuer: 'Google Cloud',
@@ -22,6 +33,7 @@ const certifications = [
     issuer: 'UC San Diego',
     link: 'https://www.coursera.org/account/accomplishments/certificate/QQ7XUYP5PBD6'
   },
+  
   {
     name: 'Building Your Leadership Skills',
     issuer: 'HEC Paris',

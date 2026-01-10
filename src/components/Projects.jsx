@@ -2,8 +2,16 @@ import './Projects.css';
 import { motion } from 'framer-motion';
 
 const projects = [
+  { name: 'Real-Time Sales Streaming Pipeline', github: 'https://github.com/rajatbaranwal/real-time-sales-streaming-pipeline' },
+  { name: 'Intelligent Stress Assessment Using Keystrokes', github: 'https://github.com/rajatbaranwal/intelligent-stress-assessment-using-keystrokes' },
+  { name: 'RoadResQ – Frontend', github: 'https://github.com/rajatbaranwal/roadresq_frontend' },
+  { name: 'RoadResQ – Backend', github: 'https://github.com/rajatbaranwal/roadresq_backkend' },
+  { name: 'Real Estate AI Analysis', github: 'https://github.com/rajatbaranwal/real-estate-ai-analysis' },
+  { name: 'Py Smart Shell', github: 'https://github.com/rajatbaranwal/py-smart-shell' },
+  { name: 'Collaborative Canvas', github: 'https://github.com/rajatbaranwal/collaborative-canvas' },
   { name: 'MediQ – Frontend', github: 'https://github.com/rajatbaranwal/MediQ-Frontend' },
   { name: 'MediQ – Backend', github: 'https://github.com/rajatbaranwal/MediQ-b-ckend' },
+  { name: 'Maersk Report Highlighter', github: 'https://github.com/rajatbaranwal/maersk-report-highlighter' },
   { name: 'Online Quiz System (XAMPP)', github: 'https://github.com/rajatbaranwal/Online-Quiz-System-Using-XAMPP' },
   { name: 'BookSphere', github: 'https://github.com/rajatbaranwal/BookSphere' },
   { name: 'Sentimental Analysis', github: 'https://github.com/rajatbaranwal/Sentimental_Analysis' },
