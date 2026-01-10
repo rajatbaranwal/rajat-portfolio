@@ -1,13 +1,13 @@
 .hero-container {
-  height: 90vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 
-  background-color: var(--bg-dark); 
+  background-color: var(--bg-dark);
   text-align: center;
-  padding: 100px 20px 10px; /* pushes content down from top */
+  padding: 100px 20px 10px;
 }
 
 #hero,
@@ -15,60 +15,86 @@
 #about,
 #contact,
 #skills {
-  scroll-margin-top: 100px; /* height of your sticky navbar */
+  scroll-margin-top: 100px;
 }
 
-
-
+/* Avatar */
 .hero-avatar {
-  width: 650px;        /* control size */
-  max-width: 200%;
+  width: 650px;
+  max-width: 100%;
   height: auto;
 
   display: block;
-  margin: 0 auto;      /* center in middle */
+  margin: 0 auto;
 
-  background-color: #0f172a; /* matches your Hero bg */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* soft blur */
-}
-.hero-avatar {
-  /* ... previous styles ... */
+  background-color: #0f172a;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   animation: pulseGlow 2s infinite;
 }
 
 @keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 12px #3b82f6;
-  }
-  50% {
-    box-shadow: 0 0 20px #2563eb;
-  }
-  100% {
-    box-shadow: 0 0 12px #3b82f6;
-  }
+  0%   { box-shadow: 0 0 12px #3b82f6; }
+  50%  { box-shadow: 0 0 20px #2563eb; }
+  100% { box-shadow: 0 0 12px #3b82f6; }
 }
 
-/* .hero-avatar {
-  mix-blend-mode: screen; /* or multiply/darken */
-} */
-
+/* Title */
 .hero-title {
+  position: relative;
   font-size: 20rem;
-  font-weight: bold;
+  font-weight: 800;
   color: white;
+  margin-top: -20px;
   margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.35);
 }
 
-.hero-title .highlight {
-  color: var(--primary-blue);
+.hero-title .ghost {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: inherit;
+  font-weight: inherit;
+  color: rgba(59, 130, 246, 0.25);
+  z-index: -1;
+  pointer-events: none;
 }
+
+/* Gradient Name */
+.gradient-name {
+  display: inline-block;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, #3b82f6, #9333ea, #f43f5e, #3b82f6);
+  background-size: 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: textGlow 4s linear infinite;
+  font-weight: bold;
+}
+
+@keyframes textGlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Subtitle */
 .hero-subtitle {
   font-size: 1.3rem;
-  color: var(--accent-blue); /* optional: or keep --text-light */
-  min-height: 30px; /* 👈 prevents layout jump during typing */
+  color: var(--accent-blue);
+  min-height: 30px;
   margin-bottom: 2rem;
 }
 
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
 
 .hero-button {
   padding: 12px 24px;
@@ -83,30 +109,36 @@
 
 .hero-button:hover {
   background-color: var(--hover-blue);
-  color: white; /* 👈 explicitly ensure text stays white */
-}
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
-}
-.gradient-name {
-  background: linear-gradient(90deg, #3b82f6, #9333ea, #f43f5e, #3b82f6);
-  background-size: 300%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: textGlow 4s linear infinite;
-  font-weight: bold;
+  color: white;
 }
 
-@keyframes textGlow {
-  0% {
-    background-position: 0% 50%;
+/* 🔽 Mobile Optimization */
+@media (max-width: 768px) {
+  .hero-container {
+    min-height: auto;
+    padding: 70px 16px 20px;
   }
-  100% {
-    background-position: 200% 50%;
+
+  .hero-avatar {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    margin-top: 0;
+  }
+
+  .gradient-name {
+    margin-bottom: 10px;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
   }
 }

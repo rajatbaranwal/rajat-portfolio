@@ -7,11 +7,26 @@ const Hero = () => {
     <section id="hero" className="hero-container">
       <motion.h1
         className="hero-title"
-        initial={{ opacity: 0, y: -50 }}
+        initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        Hi, I'm <span className="gradient-name">Rajat</span>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          Hi, I'm
+        </motion.span>
+        <br />
+        <motion.span
+          className="gradient-name"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.7 }}
+        >
+          Rajat
+        </motion.span>
       </motion.h1>
 
       <motion.p
