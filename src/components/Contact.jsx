@@ -11,7 +11,7 @@ import { profile } from '../data/profile';
 
 // EmailJS public identifiers — these are designed to be exposed client-side.
 const EMAILJS = {
-  serviceId: 'service_h04xkwq',
+  serviceId: 'service_wmnp2d2',
   templateId: 'template_x08k6rp',
   publicKey: 'ZWSGwpf7Ib7bYmllk',
 };
@@ -33,11 +33,19 @@ const Contact = () => {
     setStatus('sending');
     emailjs
       .sendForm(EMAILJS.serviceId, EMAILJS.templateId, form.current, EMAILJS.publicKey)
-      .then(() => {
+      .then((res) => {
+        if (res?.status !== 200) throw res;
         setStatus('sent');
         form.current.reset();
       })
-      .catch(() => setStatus('error'));
+      .catch((err) => {
+        // EmailJS rejects with { status, text }; text is its error message (no credentials or form data).
+        console.error('[contact] EmailJS send failed', {
+          status: err?.status ?? 'network',
+          message: err?.text ?? err?.message ?? String(err),
+        });
+        setStatus('error');
+      });
   };
 
   const copyEmail = async () => {
