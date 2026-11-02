@@ -1,111 +1,129 @@
 import './Contact.css';
 import { motion } from 'framer-motion';
 import emailjs from 'emailjs-com';
-import { useRef } from 'react';
-import { FaLinkedin, FaGithub, FaTwitter, FaPhoneAlt } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
+import { useRef, useState } from 'react';
+import { FiArrowUpRight, FiCheck, FiCopy, FiGithub, FiLinkedin, FiPhone } from 'react-icons/fi';
+import { FaXTwitter } from 'react-icons/fa6';
+import Button from './Button';
+import Section from './Section';
+import { reveal } from '../lib/motion';
+import { profile } from '../data/profile';
+
+// EmailJS public identifiers — these are designed to be exposed client-side.
+const EMAILJS = {
+  serviceId: 'service_h04xkwq',
+  templateId: 'template_x08k6rp',
+  publicKey: 'ZWSGwpf7Ib7bYmllk',
+};
+
+const socials = [
+  { label: 'LinkedIn', href: profile.links.linkedin, icon: FiLinkedin, handle: 'in/rajat-baranwal' },
+  { label: 'GitHub', href: profile.links.github, icon: FiGithub, handle: 'rajatbaranwal' },
+  { label: 'X', href: profile.links.x, icon: FaXTwitter, handle: '@RajatBaran58997' },
+  { label: 'Phone', href: `tel:${profile.phone}`, icon: FiPhone, handle: profile.phone },
+];
 
 const Contact = () => {
   const form = useRef();
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [copied, setCopied] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
-
+    setStatus('sending');
     emailjs
-      .sendForm(
-        'service_h04xkwq',       // Your service ID
-        'template_x08k6rp',      // Your template ID
-        form.current,
-        'ZWSGwpf7Ib7bYmllk'      // Your public key
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          alert('Message sent successfully!');
-          form.current.reset();
-        },
-        (error) => {
-          console.error(error.text);
-          alert('Oops! Something went wrong.');
-        }
-      );
+      .sendForm(EMAILJS.serviceId, EMAILJS.templateId, form.current, EMAILJS.publicKey)
+      .then(() => {
+        setStatus('sent');
+        form.current.reset();
+      })
+      .catch(() => setStatus('error'));
+  };
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${profile.email}`;
+    }
   };
 
   return (
-    <motion.section
+    <Section
       id="contact"
-      className="contact-container"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      index="06"
+      label="Contact"
+      title="Let’s talk"
+      intro="I’m looking for Software Engineer, Backend, and Full Stack roles. The fastest way to reach me is email."
     >
-      <motion.h2
-        className="contact-title"
-        initial={{ opacity: 0, y: -40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Contact Me
-      </motion.h2>
+      <div className="contact-grid">
+        <motion.div className="contact-info" {...reveal}>
+          <div className="contact-email">
+            <a href={`mailto:${profile.email}`} className="contact-email-link">
+              {profile.email}
+            </a>
+            <button type="button" className="contact-copy" onClick={copyEmail} aria-label="Copy email address">
+              {copied ? <FiCheck /> : <FiCopy />}
+              <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
+            </button>
+          </div>
 
-      {/* Contact Form */}
-      <motion.form
-        ref={form}
-        onSubmit={sendEmail}
-        className="contact-form"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 1 }}
-      >
-        <input type="text" name="user_name" placeholder="Your Name" required />
-        <input type="email" name="user_email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit">Send Message</button>
-      </motion.form>
+          <ul className="contact-socials">
+            {socials.map(({ label, href, icon: Icon, handle }) => {
+              const external = href.startsWith('http');
+              return (
+                <li key={label}>
+                  <a href={href} {...(external && { target: '_blank', rel: 'noopener noreferrer' })}>
+                    <Icon aria-hidden="true" />
+                    <span className="contact-social-label">{label}</span>
+                    <span className="contact-social-handle mono">{handle}</span>
+                    {external && <FiArrowUpRight className="contact-social-arrow" aria-hidden="true" />}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
 
-      {/* Social Media Links */}
-      <motion.div
-        className="social-links"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 1 }}
-      >
-        <a
-          href="https://www.linkedin.com/in/rajat-baranwal/"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="LinkedIn"
-        >
-          <FaLinkedin className="icon" />
-        </a>
+          <p className="contact-profiles">
+            <span className="mono">Coding profiles</span>
+            {profile.codingProfiles.map((p) => (
+              <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer">
+                {p.name}
+              </a>
+            ))}
+          </p>
+        </motion.div>
 
-        <a
-          href="https://github.com/rajatbaranwal"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="GitHub"
-        >
-          <FaGithub className="icon" />
-        </a>
+        <motion.form ref={form} onSubmit={sendEmail} className="contact-form" {...reveal}>
+          <div className="field-row">
+            <label className="field">
+              <span>Name</span>
+              <input type="text" name="user_name" autoComplete="name" required />
+            </label>
+            <label className="field">
+              <span>Email</span>
+              <input type="email" name="user_email" autoComplete="email" required />
+            </label>
+          </div>
+          <label className="field">
+            <span>Message</span>
+            <textarea name="message" rows="5" required />
+          </label>
 
-        <a
-          href="https://x.com/RajatBaran58997"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Twitter"
-        >
-          <FaTwitter className="icon" />
-        </a>
-
-        <a href="mailto:rajat123baranwal@gmail.com" title="Email">
-          <MdEmail className="icon" />
-        </a>
-
-        <a href="tel:+91-9934275919" title="Call Me">
-          <FaPhoneAlt className="icon" />
-        </a>
-      </motion.div>
-    </motion.section>
+          <div className="form-footer">
+            <Button type="submit" disabled={status === 'sending'}>
+              {status === 'sending' ? 'Sending…' : 'Send message'}
+            </Button>
+            <p className={`form-status form-status-${status}`} role="status">
+              {status === 'sent' && 'Thanks — your message was sent.'}
+              {status === 'error' && 'Something went wrong. Please email me directly.'}
+            </p>
+          </div>
+        </motion.form>
+      </div>
+    </Section>
   );
 };
 

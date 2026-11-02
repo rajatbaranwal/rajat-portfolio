@@ -1,82 +1,74 @@
-import { motion } from "framer-motion";
-import "./Hero.css";
-import { Typewriter } from "react-simple-typewriter";
+import './Hero.css';
+import { motion } from 'framer-motion';
+import { FiArrowRight, FiDownload, FiGithub, FiLinkedin } from 'react-icons/fi';
+import Button from './Button';
+import EventStream from './EventStream';
+import { profile } from '../data/profile';
+import { ease } from '../lib/motion';
+
+const rise = (delay) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, delay, ease },
+});
 
 const Hero = () => {
   return (
-    <section id="hero" className="hero-container">
-      <motion.h1
-        className="hero-title"
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          Hi, I'm
-        </motion.span>
-        <br />
-        <motion.span
-          className="gradient-name"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.7 }}
-        >
-          Rajat
-        </motion.span>
-      </motion.h1>
+    <section id="hero" className="hero">
+      <div className="hero-backdrop" aria-hidden="true" />
 
-      <motion.p
-        className="hero-subtitle"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-        <Typewriter
-          words={[
-            "Full Stack Developer",
-            "Problem Solver",
-            "Tech Enthusiast",
-            "Open Source Contributor",
-          ]}
-          loop={0} // infinite
-          cursor
-          cursorStyle="|"
-          typeSpeed={70}
-          deleteSpeed={50}
-          delaySpeed={1500}
-        />
-      </motion.p>
+      <div className="container hero-grid">
+        <div className="hero-copy">
+          <motion.p className="hero-status" {...rise(0)}>
+            <span className="hero-status-dot" aria-hidden="true" />
+            {profile.availability}
+          </motion.p>
 
-      <img
-        src="/pixel-jeff-matrix-s.gif"
-        alt="Rajat Hacker Avatar"
-        className="hero-avatar"
-      />
+          <motion.h1 className="hero-title" {...rise(0.08)}>
+            {profile.name}
+            <span className="hero-role">{profile.role}</span>
+          </motion.h1>
 
-      <div className="hero-buttons">
-        <motion.a
-          href="#projects"
-          className="hero-button"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          <motion.p className="hero-headline" {...rise(0.16)}>
+            {profile.headline}
+          </motion.p>
+
+          <motion.p className="hero-summary" {...rise(0.22)}>
+            {profile.summary}
+          </motion.p>
+
+          <motion.ul className="hero-focus mono" aria-label="Focus areas" {...rise(0.28)}>
+            {profile.focus.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </motion.ul>
+
+          <motion.div className="hero-actions" {...rise(0.34)}>
+            <Button href="#projects">
+              View projects <FiArrowRight aria-hidden="true" />
+            </Button>
+            <Button variant="secondary" href={profile.resume} download="Rajat-Baranwal-Resume.pdf">
+              <FiDownload aria-hidden="true" /> Download resume
+            </Button>
+            <div className="hero-socials">
+              <a href={profile.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <FiGithub />
+              </a>
+              <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <FiLinkedin />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          className="hero-visual"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.3, ease }}
         >
-          See My Work
-        </motion.a>
-
-        <motion.a
-          href="/Rajat-Baranwal-Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hero-button"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Download Resume
-        </motion.a>
+          <EventStream />
+        </motion.div>
       </div>
     </section>
   );

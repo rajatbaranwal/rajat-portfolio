@@ -1,98 +1,53 @@
 import './Skills.css';
 import { motion } from 'framer-motion';
-import {
-  FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython, FaJava, FaPhp,
-  FaGitAlt, FaGithub, FaLinux, FaWindows, FaDatabase, FaCode
-} from 'react-icons/fa';
-import {
-  SiMongodb, SiMysql, SiXampp, SiPostman, SiJquery, SiBootstrap, SiExpress
-} from 'react-icons/si';
+import { FiBox, FiCode, FiCpu, FiDatabase, FiLayers, FiLayout, FiServer, FiActivity } from 'react-icons/fi';
+import Section from './Section';
+import { revealItem } from '../lib/motion';
+import { skillGroups } from '../data/profile';
 
-const skillGroups = [
-  {
-    title: 'Languages',
-    skills: [
-        { name: 'C', icon: <FaCode /> },
-        { name: 'C++', icon: <FaCode /> },
-      { name: 'Python', icon: <FaPython /> },
-      { name: 'Java', icon: <FaJava /> },
-      { name: 'PHP', icon: <FaPhp /> }
-    ]
-  },
-  {
-    title: 'Web Technologies',
-    skills: [
-      { name: 'HTML', icon: <FaHtml5 /> },
-      { name: 'CSS', icon: <FaCss3Alt /> },
-      { name: 'JavaScript', icon: <FaJs /> },
-      { name: 'ReactJS', icon: <FaReact /> },
-      { name: 'NodeJS', icon: <FaNodeJs /> },
-      { name: 'ExpressJS', icon: <SiExpress /> },
-      { name: 'Bootstrap', icon: <SiBootstrap /> },
-      { name: 'JQuery', icon: <SiJquery /> }
-    ]
-  },
-  {
-    title: 'Databases',
-    skills: [
-      { name: 'MongoDB', icon: <SiMongodb /> },
-      { name: 'MySQL', icon: <SiMysql /> }
-    ]
-  },
-  {
-    title: 'Tools',
-    skills: [
-      { name: 'Git', icon: <FaGitAlt /> },
-      { name: 'GitHub', icon: <FaGithub /> },
-      { name: 'VS Code', icon: <FaCode /> },
-      { name: 'XAMPP', icon: <SiXampp /> },
-      { name: 'Postman', icon: <SiPostman /> }
-    ]
-  },
-  {
-    title: 'Operating Systems',
-    skills: [
-      { name: 'Linux', icon: <FaLinux /> },
-      { name: 'Windows', icon: <FaWindows /> },
-      { name: 'MacOS' }
-    ]
-  }
-];
+const icons = {
+  Languages: FiCode,
+  'Backend & APIs': FiServer,
+  Frontend: FiLayout,
+  'AI & Speech Processing': FiCpu,
+  Databases: FiDatabase,
+  'Testing & Monitoring': FiActivity,
+  'Tools & DevOps': FiBox,
+  'Core Concepts': FiLayers,
+};
 
 const Skills = () => {
   return (
-    <motion.section id="skills" className="skills-section">
-      <motion.h2
-        className="skills-heading"
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        My Tech Stack
-      </motion.h2>
-
-      <div className="skills-container">
-        {skillGroups.map((group, idx) => (
-          <motion.div
-            key={idx}
-            className="skill-category"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.2 }}
-          >
-            <h3>{group.title}</h3>
-            <div className="skill-items">
-              {group.skills.map((skill, index) => (
-                <div className="skill-item" key={index}>
-                  <div className="skill-icon">{skill.icon}</div>
-                  <span>{skill.name}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+    <Section
+      id="skills"
+      index="03"
+      label="Skills"
+      title="Technical skills"
+      intro="The languages, frameworks, and tools I use across backend, frontend, and AI work."
+    >
+      <div className="skills-grid">
+        {skillGroups.map((group, i) => {
+          const Icon = icons[group.title] ?? FiCode;
+          return (
+            <motion.div
+              key={group.title}
+              className="skill-group"
+              {...revealItem((i % 4) * 0.06)}
+            >
+              <h3 className="skill-group-title">
+                <Icon aria-hidden="true" />
+                {group.title}
+              </h3>
+              <ul className="skill-list">
+                {group.skills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
+            </motion.div>
+          );
+        })}
       </div>
-    </motion.section>
+    </Section>
   );
 };
 

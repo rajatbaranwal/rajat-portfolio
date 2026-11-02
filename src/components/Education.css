@@ -1,0 +1,76 @@
+.edu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: clamp(24px, 4vw, 36px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+}
+
+.edu-period {
+  font-size: 0.8125rem;
+  color: var(--accent);
+}
+
+.edu-degree {
+  margin-top: 10px;
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.edu-degree span {
+  display: block;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.edu-school {
+  margin-top: 8px;
+  color: var(--text-faint);
+}
+
+.edu-facts {
+  display: flex;
+  gap: 1px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--border);
+  overflow: hidden;
+}
+
+.edu-facts div {
+  min-width: 150px;
+  padding: 16px 20px;
+  background: var(--bg-raised);
+}
+
+.edu-facts dt {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.edu-facts dd {
+  margin-top: 6px;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 760px) {
+  .edu {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .edu-facts div {
+    flex: 1;
+    min-width: 0;
+  }
+}

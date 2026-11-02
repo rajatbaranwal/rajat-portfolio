@@ -1,63 +1,102 @@
 import './Projects.css';
 import { motion } from 'framer-motion';
-
-const projects = [
-  { name: 'Real-Time Sales Streaming Pipeline', github: 'https://github.com/rajatbaranwal/real-time-sales-streaming-pipeline' },
-  { name: 'Intelligent Stress Assessment Using Keystrokes', github: 'https://github.com/rajatbaranwal/intelligent-stress-assessment-using-keystrokes' },
-  { name: 'RoadResQ – Frontend', github: 'https://github.com/rajatbaranwal/roadresq_frontend' },
-  { name: 'RoadResQ – Backend', github: 'https://github.com/rajatbaranwal/roadresq_backkend' },
-  { name: 'Real Estate AI Analysis', github: 'https://github.com/rajatbaranwal/real-estate-ai-analysis' },
-  { name: 'Py Smart Shell', github: 'https://github.com/rajatbaranwal/py-smart-shell' },
-  { name: 'Collaborative Canvas', github: 'https://github.com/rajatbaranwal/collaborative-canvas' },
-  { name: 'MediQ – Frontend', github: 'https://github.com/rajatbaranwal/MediQ-Frontend' },
-  { name: 'MediQ – Backend', github: 'https://github.com/rajatbaranwal/MediQ-b-ckend' },
-  { name: 'Maersk Report Highlighter', github: 'https://github.com/rajatbaranwal/maersk-report-highlighter' },
-  { name: 'Online Quiz System (XAMPP)', github: 'https://github.com/rajatbaranwal/Online-Quiz-System-Using-XAMPP' },
-  { name: 'BookSphere', github: 'https://github.com/rajatbaranwal/BookSphere' },
-  { name: 'Sentimental Analysis', github: 'https://github.com/rajatbaranwal/Sentimental_Analysis' },
-  { name: 'Medicine App', github: 'https://github.com/rajatbaranwal/MedicineApp' },
-  { name: 'Student DB Management', github: 'https://github.com/rajatbaranwal/Student-Database-Management-System' },
-  { name: 'ToDo App (ReactJS)', github: 'https://github.com/rajatbaranwal/ToDo-With-ReactJS' },
-  { name: 'Tomato Disease Detector (Blockchain)', github: 'https://github.com/rajatbaranwal/blockchain-tomato-disease-detector' },
-  { name: 'Page Replacement Algo', github: 'https://github.com/rajatbaranwal/PageReplacementAlgo' },
-  { name: 'Currency Converter', github: 'https://github.com/rajatbaranwal/CurrencyConverter' },
-  { name: 'Password Generator', github: 'https://github.com/rajatbaranwal/Password-Generator' }
-];
+import { FiArrowUpRight, FiGithub } from 'react-icons/fi';
+import Button from './Button';
+import Section from './Section';
+import { reveal, revealItem } from '../lib/motion';
+import { Badge, KindTag } from './Badge';
+import { featuredWork, moreProjects, profile, projects } from '../data/profile';
 
 const Projects = () => {
   return (
-    <motion.section
+    <Section
       id="projects"
-      className="projects-container"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      index="02"
+      label="Projects"
+      title="Selected work"
+      intro="What I built, how it works, and the problem each one addresses."
     >
-      <h2 className="projects-heading">My Projects</h2>
+      <motion.article className="featured" {...reveal}>
+        <div className="featured-head">
+          <div>
+            <p className="featured-tagline mono">{featuredWork.tagline}</p>
+            <h3 className="featured-name">{featuredWork.name}</h3>
+            <p className="featured-note">{featuredWork.note}</p>
+          </div>
+          <Button variant="secondary" size="sm" href={featuredWork.url} target="_blank" rel="noopener noreferrer">
+            {featuredWork.urlLabel} <FiArrowUpRight aria-hidden="true" />
+          </Button>
+        </div>
 
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <motion.a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="project-card simple"
-          key={index}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          whileHover={{ scale: 1.03, y: -2 }}
-          transition={{
-            duration: 0.4,             
-            delay: index * 0.02        
-          }}
-        >
-        
-            <h3>{project.name}</h3>
-            <p>View on GitHub →</p>
-          </motion.a>
+        <div className="featured-groups">
+          {featuredWork.groups.map((group) => (
+            <div key={group.kind} className="featured-group">
+              <KindTag kind={group.kind} />
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </motion.article>
+
+      <div className="project-grid">
+        {projects.map((project, i) => (
+          <motion.article
+            key={project.name}
+            className="project"
+            {...revealItem(i * 0.08)}
+          >
+            <p className="project-tagline mono">{project.tagline}</p>
+            <h3 className="project-name">{project.name}</h3>
+            <p className="project-problem">{project.problem}</p>
+
+            <ul className="project-points">
+              {project.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+
+            <div className="project-tech">
+              {project.tech.map((t) => (
+                <Badge key={t}>{t}</Badge>
+              ))}
+            </div>
+
+            <div className="project-links">
+              {project.repos.map((repo) => (
+                <a key={repo.url} href={repo.url} target="_blank" rel="noopener noreferrer">
+                  <FiGithub aria-hidden="true" />
+                  {repo.label}
+                  <span className="sr-only"> repository for {project.name}</span>
+                </a>
+              ))}
+            </div>
+          </motion.article>
         ))}
       </div>
-    </motion.section>
+
+      <motion.div className="more-projects" {...reveal}>
+        <div className="more-head">
+          <h3>More on GitHub</h3>
+          <a href={profile.links.github} target="_blank" rel="noopener noreferrer" className="more-all mono">
+            github.com/rajatbaranwal <FiArrowUpRight aria-hidden="true" />
+          </a>
+        </div>
+        <ul className="more-list">
+          {moreProjects.map((repo) => (
+            <li key={repo.url}>
+              <a href={repo.url} target="_blank" rel="noopener noreferrer">
+                <span>{repo.name}</span>
+                <FiArrowUpRight aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    </Section>
   );
 };
 

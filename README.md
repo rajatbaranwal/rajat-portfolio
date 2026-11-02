@@ -1,12 +1,40 @@
-# React + Vite
+# Rajat Baranwal — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio for Rajat Baranwal, Software Engineer (backend, real-time systems, full stack, AI integration).
 
-Currently, two official plugins are available:
+Live: https://my-portfolio-mu-one-em2brs6wnh.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack
 
-## Expanding the ESLint configuration
+React 19 · Vite 6 · framer-motion · react-icons · EmailJS (contact form) · plain CSS with design tokens
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project structure
+
+```
+public/
+  Rajat-Baranwal-Resume.pdf   # served at /Rajat-Baranwal-Resume.pdf
+  favicon.svg, logo.png       # favicon, Open Graph image
+src/
+  data/profile.js             # all content: experience, projects, skills, education, credentials, links
+  lib/motion.js               # shared animation presets
+  components/                 # one component + stylesheet per section / UI primitive
+  index.css                   # design tokens and base styles
+```
+
+To update content, edit `src/data/profile.js` — components render from it. Keep it consistent with the resume PDF.
+
+## Development
+
+```bash
+npm install
+npm run dev       # http://localhost:5173
+npm run lint
+npm run build     # outputs to dist/
+npm run preview   # serve the production build locally
+```
+
+## Deployment (Vercel)
+
+The site is a static Vite build. On Vercel: framework preset **Vite**, build command `npm run build`, output directory `dist`. Pushing to `main` redeploys if the GitHub repo is connected.
+
+To replace the resume, overwrite `public/Rajat-Baranwal-Resume.pdf` with the same filename.

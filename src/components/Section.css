@@ -1,0 +1,44 @@
+.section {
+  position: relative;
+  padding: clamp(72px, 10vw, 120px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  max-width: 640px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.section-index {
+  color: var(--accent);
+}
+
+.section-rule {
+  width: 24px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.section-intro {
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+}
