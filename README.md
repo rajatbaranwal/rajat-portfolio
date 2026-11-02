@@ -2,7 +2,7 @@
 
 Personal portfolio for Rajat Baranwal, Software Engineer (backend, real-time systems, full stack, AI integration).
 
-Live: https://my-portfolio-mu-one-em2brs6wnh.vercel.app/
+Live:(https://rajat-portfolio-lime.vercel.app/)
 
 ## Stack
 
