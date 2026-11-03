@@ -145,8 +145,7 @@ export const projects = [
     ],
     tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Socket.IO', 'Leaflet', 'JWT'],
     repos: [
-      { label: 'Frontend', url: 'https://github.com/rajatbaranwal/roadresq_frontend' },
-      { label: 'Backend', url: 'https://github.com/rajatbaranwal/roadresq_backkend' },
+      { label: 'Repository', url: 'https://github.com/rajatbaranwal/roadresq' },
     ],
   },
   {
