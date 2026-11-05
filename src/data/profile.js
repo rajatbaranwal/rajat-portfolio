@@ -149,7 +149,7 @@ export const projects = [
     ],
   },
   {
-    name: 'MediQ',
+    name: 'MediQ-Platform',
     tagline: 'Hospital management system',
     problem:
       'Hospitals juggle OPD queues, bed availability, and inventory across roles that should only see what they need.',
@@ -160,8 +160,8 @@ export const projects = [
     ],
     tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT'],
     repos: [
-      { label: 'Frontend', url: 'https://github.com/rajatbaranwal/MediQ-Frontend' },
-      { label: 'Backend', url: 'https://github.com/rajatbaranwal/MediQ-b-ckend' },
+      { label: 'Repository', url: 'https://github.com/rajatbaranwal/mediq-platform' },
+      
     ],
   },
   {
